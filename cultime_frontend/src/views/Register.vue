@@ -7,7 +7,7 @@
 // import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'Home',
+  name: 'Register',
   data() {
     return {
         movieTitle: "Parasite",
