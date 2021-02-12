@@ -1,7 +1,5 @@
 <template>
-  <div>
-    
-  </div>
+    <p>{{movieTitle}}</p>
 </template>
 
 <script>
@@ -9,7 +7,7 @@
 // import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'Register',
+  name: 'Feed',
   data() {
     return {
         movieTitle: "Parasite",
