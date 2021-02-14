@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import make_password
 
+from api.models import Follow
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,4 +34,16 @@ class RegisterSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+        fields = (
+            'first_name',
+            'last_name',
+            'username',
+        )
+
+
+class FollowSerializer(serializers.ModelSerializer):
+    following = UserSerializer()
+
+    class Meta:
+        model = Follow
         fields = '__all__'
