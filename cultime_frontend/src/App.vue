@@ -5,7 +5,9 @@
       <router-link to="/login">Login</router-link> |
       <router-link to="/register">Create Account</router-link> |
       <router-link to="/feed">Feed</router-link> |
-      <router-link to="/watchlist">Watch List</router-link>
+      <router-link to="/watchlist">Watch List</router-link> |
+      <router-link to="/following">Following</router-link> |
+      <router-link to="/recommended">Recommended</router-link>
     </div>
     <router-view/>
   </div>
