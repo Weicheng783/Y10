@@ -4,6 +4,7 @@ from django.core.exceptions import NON_FIELD_ERRORS
 
 # Table for following system
 class Follow(models.Model):
+    # This means following(Person A) follows follower(Person B)
     following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
     follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follower')
 

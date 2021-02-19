@@ -50,7 +50,7 @@ class FollowingAPI(generics.GenericAPIView):
 
         try:
             user2 = User.objects.get(username=request.data['username'])
-        except :
+        except:
             return Response({
                 "error": "No user with such username",
             })

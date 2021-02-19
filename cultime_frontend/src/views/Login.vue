@@ -1,5 +1,10 @@
 <template>
-  <div class="login">
+  <div id="login">
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/register">Create Account</router-link>
+    </div>
     <form>
       <label for="username" >Username</label>
       <div>
