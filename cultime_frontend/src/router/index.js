@@ -7,8 +7,13 @@ import Feed from '../views/Feed.vue'
 import WatchList from '../views/WatchList.vue'
 import Following from '../views/Following.vue'
 import Recommended from '../views/Recommended.vue'
+import Profile from '../views/Profile.vue'
+
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
 
 Vue.use(VueRouter)
+Vue.use(Buefy)
 
 const routes = [
   {
@@ -63,6 +68,14 @@ const routes = [
     path: '/recommended',
     name: 'Recommended',
     component: Recommended,
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
     meta: {
       requiresAuth: true,
     }

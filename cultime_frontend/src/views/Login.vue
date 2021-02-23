@@ -6,18 +6,18 @@
       <router-link to="/register">Create Account</router-link>
     </div>
     <form>
-      <label for="username" >Username</label>
+      <label for="username" style="text-align:left; ">Username</label>
       <div>
-        <input id="username" type="text" v-model="username" required autofocus>
+        <input style="max-width: 250px;" class="input" id="username" type="text" v-model="username" required autofocus>
       </div>
       <div>
         <label for="password" >Password</label>
         <div>
-          <input id="password" type="password" v-model="password" required>
+          <input style="max-width: 250px;" id="password" class="input" type="password" v-model="password" required>
         </div>
       </div>
       <div>
-        <button type="submit" @click="handleSubmit">
+        <button id="login-button" class="button" type="submit" @click="handleSubmit">
           Login
         </button>
       </div>
@@ -71,3 +71,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>
