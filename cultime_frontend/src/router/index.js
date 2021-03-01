@@ -12,6 +12,10 @@ import Profile from '../views/Profile.vue'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 
+import Autocomplete from '@trevoreyre/autocomplete-vue'
+// import '@trevoreyre/autocomplete-vue/dist/style.css'
+
+Vue.use(Autocomplete)
 Vue.use(VueRouter)
 Vue.use(Buefy)
 

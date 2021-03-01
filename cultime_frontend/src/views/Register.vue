@@ -72,7 +72,7 @@ export default {
       e.preventDefault()
       if (this.password === this.password_confirmation && this.password.length > 0)
       {
-        let url = "http://localhost:8000/authentication/register/"
+        let url = "http://localhost:8000/register/"
         axios.post(url, {
           username: this.username,
           password: this.password,

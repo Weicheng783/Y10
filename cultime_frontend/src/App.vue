@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 export default {
   name: "app",
   methods: {
@@ -20,6 +19,10 @@ export default {
 
 <style>
 #app {
+  color:white;
+  margin: 0px;
+  background-color: #201c1c;
+  background-size: cover;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -33,10 +36,13 @@ export default {
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #ffffff;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #ffffff;
+}
+p, label{
+  color: white;
 }
 </style>
