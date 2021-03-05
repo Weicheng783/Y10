@@ -56,6 +56,12 @@ class FollowingAPI(generics.GenericAPIView):
             })
         
         new_follow_relation = Follow(following = user1, follower = user2)
+
+        if(Follow.objects.filter(following = user1, follower = user2).count() != 0):
+            return Response({
+                "message": "You already follow that person!",
+            })
+
         new_follow_relation.save()
 
         return Response({

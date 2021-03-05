@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import make_password
 
 from api.models import Follow
+from api.models import Movie
+from api.models import WatchList
+from api.models import Review
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -43,8 +46,31 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class FollowSerializer(serializers.ModelSerializer):
-    following = UserSerializer()
+    follower = UserSerializer()
 
     class Meta:
         model = Follow
+        fields = ('follower',)
+
+
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = '__all__'
+
+
+class WatchListSerializer(serializers.ModelSerializer):
+    movie = MovieSerializer()
+
+    class Meta:
+        model = WatchList
+        fields = ('movie',)
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    movie = MovieSerializer()
+    author = UserSerializer()
+
+    class Meta:
+        model = Review
         fields = '__all__'
