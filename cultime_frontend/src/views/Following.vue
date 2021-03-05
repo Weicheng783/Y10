@@ -7,7 +7,19 @@
             <router-link to="/recommended">Recommended</router-link>
         </div>
         <p>The people you follow go here</p>
-        <p v-for="person in persons" :key="person.first_name" >{{person.first_name}} {{person.last_name}}</p>
+        <div v-for="person in persons" :key="person.name" class="FollowingBlock">
+            <div style="display: flex; padding: 10px;">
+                <img v-bind:src=person.portraitPath style="max-width: 150px; border-radius: 150px;"/>
+                <div style="margin-left: 20px; margin-top: 20px;">
+                    <p class="title is-2" style="color: white; margin-bottom: 0px;">{{person.name}}</p>
+                    <p style="color:gray; font-size:22px;">{{person.smallText}}</p>
+                </div>
+            </div>
+            <div style="text-align:right; padding: 0px 20px 20px 0px;">
+                <button class="button blueButton" style="margin-right: 10px;">View Profile</button>
+                <button class="button unfollowButton">Unfollow</button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -18,11 +30,49 @@ export default {
     return {
         persons: [
             {
-                first_name: "A",
-                last_name: "B",
+                name: "Harry Johnson",
+                portraitPath: "https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=80",
+                smallText: "You both like comedy movies!",
+            },
+            {
+                name: "Oliver Smith",
+                portraitPath: "https://images.unsplash.com/photo-1582556362337-6a785ee99c63?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=80",
+                smallText: "Watched 15 similar movies!",
             }
         ],
     }
   },
 }
 </script>
+
+<style scoped>
+.FollowingBlock {
+    text-align:left;
+    margin: auto;
+    flex-direction: column;
+    background-color:#262728;
+    border-radius: 25px;
+    margin-bottom: 30px;
+    max-width: 800px;
+    color:white;
+}
+.blueButton {
+    background-color: rgb(59, 167, 238);
+    border-color: rgb(59, 167, 238);
+}
+
+.blueButton:hover {
+    background-color: rgb(43, 137, 199);
+    border-color: rgb(43, 137, 199);
+}
+
+.unfollowButton {
+    background-color: #FF5338;
+    border-color: #FF5338;
+}
+
+.unfollowButton:hover {
+    background-color: #cf3821;
+    border-color: #cf3821;
+}
+</style>
