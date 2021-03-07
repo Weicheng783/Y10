@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import NON_FIELD_ERRORS
 
+
 # Table for following system
 class Follow(models.Model):
     # This means following(Person A) follows follower(Person B)
@@ -42,3 +43,13 @@ class Review(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     content = models.CharField(max_length=300)
     rating = models.IntegerField()
+
+
+class AdditionalUser(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='frontend/static/profile_pictures')
+    user_bio = models.CharField(max_length=300)
+    user_instagram = models.CharField(max_length=300)
+
+    def __str__(self):
+        return str(self.user.username) + "'s additional user profile."
