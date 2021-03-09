@@ -36,7 +36,7 @@
         </div>
 
         <div style="text-align:right; padding: 0px 20px 20px 0px;">
-          <button class="button" id="removeMovieButton">Remove Movie</button>
+          <button class="button" id="removeMovieButton" v-on:click="removeMovie(movie.id)">Remove Movie</button>
         </div>
       </div>
     </div>
@@ -72,7 +72,6 @@ export default {
         movieSearchQueue: [
 
         ],
-
     }
   },
   methods: {
@@ -93,6 +92,7 @@ export default {
       })
     },
     updateWatchList() {
+      console.log("CALLED");
       var objectToken = localStorage.getItem('jwt');
       var currentToken = JSON.parse( objectToken );
       axios.get('http://localhost:8000/watchlist/', {
@@ -104,6 +104,7 @@ export default {
             this.watchList = [];
             for(let i=0;i<data.data.length;i++) {
               this.watchList.push({
+                id: data.data[i]['movie']['id'],
                 movieTitle: data.data[i]['movie']['movie_name'],
                 shortSummary: data.data[i]['movie']['overview'],
                 yearProduction: data.data[i]['movie']['production_year'],
@@ -114,7 +115,6 @@ export default {
             this.watchList = this.watchList.reverse();
           }
         );
-
     },
     addNewMovie(result) {
       for(let i=0;i<this.movieSearchQueue.length;i++) {
@@ -132,6 +132,19 @@ export default {
           }).then(() => {this.updateWatchList();});
         }
       }
+    },
+    removeMovie(inputIdIn) {
+      var objectToken = localStorage.getItem('jwt');
+      var currentToken = JSON.parse( objectToken );
+      console.log(inputIdIn);
+      axios.post('http://localhost:8000/deletewatchlist/', {id: inputIdIn}, {
+          headers: {
+            'authorization': 'Bearer ' + currentToken.access,
+            'Accept' : 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+      ).then(()=>{this.updateWatchList();});
     }
   },
   mounted() {
@@ -146,6 +159,7 @@ export default {
             this.watchList = [];
             for(let i=0;i<data.data.length;i++) {
               this.watchList.push({
+                id: data.data[i]['movie']['id'],
                 movieTitle: data.data[i]['movie']['movie_name'],
                 shortSummary: data.data[i]['movie']['overview'],
                 yearProduction: data.data[i]['movie']['production_year'],
@@ -158,14 +172,14 @@ export default {
         );
     // call refresh token
     // if error call logout
-    // var objectToken = localStorage.getItem('jwt');
-    // var currentToken = JSON.parse( objectToken );
 
-    // axios.post('http://localhost:8000/refresh/', {
-    //   refresh: currentToken.refresh
-    // }).catch(function() {
-    //   this.$emit('logOut');
-    // });
+    axios.post('http://localhost:8000/refresh/', {
+      refresh: currentToken.refresh
+    }).catch(function() {
+      this.$emit('logOut');
+    }).then(response => {
+      localStorage.setItem('jwt', JSON.stringify(response.data));
+    });
 
   }
 }

@@ -8,7 +8,6 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from api.models import Follow
 
-
 # Serializers we need
 from .serializers import RegisterSerializer, UserSerializer, FollowSerializer
 

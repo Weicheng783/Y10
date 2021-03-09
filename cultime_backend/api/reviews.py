@@ -48,8 +48,20 @@ class ReviewsAPI(generics.GenericAPIView):
 
     def get(self, request):
         "The get requests gets list of all the reviews of users current person follows."
-        current_user=request.user
-        all_reviews = Review.objects.filter(author__follower__following=current_user).prefetch_related('author')
+        current_user = request.user
+        all_reviews = Review.objects.filter(
+            author__follower__following=current_user
+        ).values(
+            'author__first_name',
+            'author__last_name',
+            'author__additionaluser__profile_picture',
+            'movie__poster_path',
+            'movie__movie_name',
+            'movie__overview',
+            'movie__id',
+            'content',
+            'rating',
+            'id',
+        )
 
-        serializer = ReviewSerializer(all_reviews, many=True)
-        return Response(serializer.data)
+        return Response(all_reviews)
