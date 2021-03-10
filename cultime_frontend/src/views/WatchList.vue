@@ -1,9 +1,9 @@
 <template>
     <div>
       <div id="navigation">
-        <router-link to="/feed">Feed</router-link> |
-        <router-link to="/watchlist">Watch List</router-link> |
-        <router-link to="/following">Following</router-link> |
+        <router-link to="/feed">Feed</router-link> 
+        <router-link to="/watchlist">Watch List</router-link> 
+        <router-link to="/following">Following</router-link> 
         <router-link to="/recommended">Recommended</router-link>
       </div>
 
@@ -198,6 +198,43 @@ h1, div, p {
   border-color: #c7801e;
 }
 
+
+#navigation a {
+  font-weight: bold;
+
+
+  appearance: button;
+
+    border: none;
+    background-color: #676172;
+
+    color: #ceaf41;
+    padding: 20px 10px 10px 10px;
+    /* margin: 30px 30px 20px 20px;  */
+    margin-right:10px;
+    margin-top:10px;
+    /* padding-right: 10px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 20px;
+
+    font-size: 20px;
+    border-radius: 12px;
+     
+}
+
+
+#navigation a:hover {
+      background-color: #b0a8be;
+    /* color: #1D1E1F; */
+    color: #131a05;
+}
+
+#navigation a.router-link-exact-active {
+  background-color: #FFAB00;
+  color: #1D1E1F;
+}
 /* SEARCH BAR CSS */
 
 

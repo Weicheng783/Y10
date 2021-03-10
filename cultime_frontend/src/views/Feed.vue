@@ -6,8 +6,10 @@
       <router-link to="/following">Following</router-link> |
       <router-link to="/recommended">Recommended</router-link> |
       <router-link to="/profile">Profile</router-link>
+      <button @click="$emit('logOut')" id='logout_button' style=''>Logout</button>
+      
     </div>  
-    <button @click="$emit('logOut')" >Logout</button>
+    
 
     <div class="reviewBlock">
       <p>Share new review</p>
@@ -129,4 +131,49 @@ h1, div {
   max-width: 800px;
   color:white;
 }
+
+
+
+#logout_button {
+  font-weight: bold;
+  display: inline-flex;
+  /* float: right; */
+  /* margin-right:10%; */
+
+  margin-left:50px;
+
+  appearance: button;
+
+    border: none;
+    background-color: #230a59;
+    border-width: ;
+    border-color: lawngreen;
+
+    color: #007acc;
+    padding: 20px 10px 10px 10px;
+    /* margin: 30px 30px 20px 20px;  */
+    margin-right:10px;
+    margin-top:10px;
+    /* padding-right: 10px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 20px;
+
+    font-size: 20px;
+    border-radius: 20px;
+     
+}
+
+
+#logout_button :hover {
+    background-color: #b0a8be;
+    /* color: #1D1E1F; */
+    color: #131a05;
+}
+
+/* #logout_button router-link-exact-active {
+  background-color: #FFAB00;
+  color: #1D1E1F;
+} */
 </style>
