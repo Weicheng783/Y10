@@ -18,7 +18,7 @@
     <div class="reviewBlock">
       <p class="title is-3" style="color:white;">Share new review</p>
 
-      <!-- <autocomplete @submit="updateCurrentReview" :search="search" style="max-width: 450px; margin: auto; padding-bottom: 60px;" defaultValue="Add new movies"></autocomplete> -->
+      <autocomplete @submit="updateCurrentReview" :search="search" style="max-width: 450px; margin: auto; padding-bottom: 60px;" defaultValue="Add new movies"></autocomplete>
 
       <p>What are your thoughts on this movie</p>
       <input v-model="newReviewContent" class="input" style="max-width:300px;"/>

@@ -1,10 +1,15 @@
+
+<script type="text/javascript">
+window.onload("changeColor");
+</script>
+
 <template>
-    <div >
+    <div id='color'>
       
       <div id="navigation">
 
       <b-nav tabs>
-      <img style="width:180px;height:30px;padding: 0px 20px;position:relative;top:10px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+      <img @click="changeColor" style="width:180px;height:30px;padding: 0px 20px;position:relative;top:10px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
         alt="--Cultime--" border="0">
      
       <router-link to="/">Home</router-link> |
@@ -15,7 +20,11 @@
       </div>
       <p>{{movieTitle}}</p>
     </div>
+
 </template>
+
+
+
 
 <script>
 // @ is an alias to /src
@@ -26,8 +35,16 @@ export default {
   data() {
     return {
         // movieTitle: "Parasite",
+        
     }
   },
+ 
+
+
+  methods: {
+    
+
+  }
 }
 </script>
 

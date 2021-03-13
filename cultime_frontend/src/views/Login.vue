@@ -1,5 +1,13 @@
+
+<script type="text/javascript">
+window.onload("changeColor");
+</script>
+
+
 <template>
-<body style="background-color:#201c1c;">
+
+
+<body id='color'>
   <div id="login">
     <div id="navigation">
       <b-nav tabs>
@@ -20,7 +28,7 @@
     </div>
     <div style="background-color:#262728;width:500px;position:relative;bottom:725px;left:100px;border-radius:25px;border:#1D1E1F;
     padding:30px;margin:0px;text-align:left">
-    <form>
+    <form >
       <div>
         <button style="font-weight:bold;color: white;background-color:#DC4437;border:#DC4437;
         padding: 30px 152px;border-radius:8px;margin:30px 0px;" class="ui button toggle" 
@@ -60,10 +68,14 @@
   </form>
   </div>
   </div>
+  
 </body>
 </template>
 
+
+
 <script>
+
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
 
@@ -79,7 +91,30 @@ export default {
       isActive: false,
     }
   },
+
+  mounted:function(){
+    this.changeColor();
+  },
+
   methods: { 
+      changeColor:function () {
+        var r=parseInt(Math.random()*255);
+        var g=parseInt(Math.random()*255);
+        var b=parseInt(Math.random()*255);
+        var colorHex=r.toString(16)+g.toString(16)+b.toString(16);
+        console.log(colorHex);
+      // document.body.bgColor="#"+colorHex;
+        var obj = document.getElementById("color");
+        obj.style.backgroundColor= '#'+colorHex;
+      // window.setTimeout("changeColor()", 1000);
+        setTimeout(() => {
+ 
+        this.changeColor()
+ 
+          }, 2000);
+    },
+
+
     handleSubmit(e){
       e.preventDefault()
         if (this.password.length > 0) {
