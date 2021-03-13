@@ -1,14 +1,17 @@
 <template>
 <body style="background-color:#201c1c;">
   <div id="login">
-    <div id="nav">
+    <div id="navigation">
       <b-nav tabs>
-        <a href="https://ibb.co/d4hyWLB"><img style="width:160px;height:30px;padding: 0px 20px;position:relative;top:10px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
-        alt="Screenshot-2021-03-01-at-22-22-49" border="0"></a>
+        <img style="width:160px;height:30px;padding: 0px 20px;position:relative;top:10px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+        alt="Screenshot-2021-03-01-at-22-22-49" border="0">
+     
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/register">Create Account</router-link>
       </b-nav>
+      
+
       <br style="fill:white;">
           <div style="text-align:right;">
         <a style="padding:0px;margin:0px;" href="https://ibb.co/VH2nb2P"><img style="width:600px;height:750px;padding: 25px 20px;border-radius:40px;" src="https://i.ibb.co/wJMG8Mx/Screenshot-2021-03-01-at-10-00-45.png" 

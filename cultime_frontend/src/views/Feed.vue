@@ -1,20 +1,24 @@
 <template>
   <div>
     <div id="navigation">
+       <b-nav tabs>
+          <img style="width:200px;height:auto;padding: 0px 20px;position:relative;top:10px; float:left; margin-top:20px; margin-left:25px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+                alt="Screenshot-2021-03-01-at-22-22-49" border="0">
       <router-link to="/feed">Feed</router-link> |
       <router-link to="/watchlist">Watch List</router-link> |
       <router-link to="/following">Following</router-link> |
       <router-link to="/recommended">Recommended</router-link> |
       <router-link to="/profile">Profile</router-link>
       <button @click="$emit('logOut')" id='logout_button' style=''>Logout</button>
-      
+        </b-nav>
+
     </div>  
     
 
     <div class="reviewBlock">
       <p>Share new review</p>
 
-      <autocomplete :search="search" style="max-width: 450px; margin: auto; padding-bottom: 60px;" defaultValue="Add new movies"></autocomplete>
+      <autocomplete :search="search" style="max-width: 450px; margin: auto; color: white; background-color: #2b4258;" defaultValue="Add new movies"></autocomplete>
 
       <p>What are your thoughts on this movie</p>
       <input class="input" style="max-width:300px;"/>
