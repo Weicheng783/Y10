@@ -1,23 +1,36 @@
 <template>
     <div>
-       <div id="navigation">
+        <div v-show="showModal"> 
+            <div class="modal is-active">
+                <div class="modal-background">
 
-        <b-nav tabs>
-            <img style="width:200px;height:auto;padding: 0px 20px;position:relative;top:10px; float:left; margin-top:20px; margin-left:25px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
-                alt="Screenshot-2021-03-01-at-22-22-49" border="0">
-            <router-link to="/" >Home</router-link>
-            <router-link to="/login" >Login</router-link> 
-            <router-link to="/register" >Create Account</router-link>
-        </b-nav>
+                </div>
+                <div class="modal-content">
+                    <div class="box">
+                        <p class="title is-4">ASDKAJSD</p>
+                    </div>
+                </div>
+                <button class="modal-close" @click="showModal=false"></button> 
+            </div>
+        </div>
 
-      </div>
- 
+        <button type="button" class="btn btn-info" @click="showModal=true">Show modal</button>
+        <div id="navigation">
+            <b-nav tabs>
+                <img style="width:200px;height:auto;padding: 0px 20px;position:relative;top:10px; float:left; margin-top:20px; margin-left:25px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+                    alt="Screenshot-2021-03-01-at-22-22-49" border="0">
+                <router-link to="/feed">Feed</router-link> |
+                <router-link to="/watchlist">Watch List</router-link> |
+                <router-link to="/following">Following</router-link> |
+                <router-link to="/recommended">Recommended</router-link>
+            </b-nav>
+        </div>
         <p>The people you follow go here</p>
         <div v-for="person in persons" :key="person.name" class="FollowingBlock">
             <div style="display: flex; padding: 10px;">
-                <img v-bind:src=person.portraitPath style="max-width: 150px; border-radius: 150px;"/>
+                <img src="https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=80" style="max-width: 150px; border-radius: 150px;"/>
                 <div style="margin-left: 20px; margin-top: 20px;">
-                    <p class="title is-2" style="color: white; margin-bottom: 0px;">{{person.name}}</p>
+                    <p class="title is-2" style="color: white; margin-bottom: 0px;">{{person.firstName}} {{person.lastName}}</p>
                     <p style="color:gray; font-size:22px;">{{person.smallText}}</p>
                 </div>
             </div>
@@ -30,14 +43,18 @@
 </template>
 
 <script>
+
+//import modal from '@/components/modal.vue'
+import axios from 'axios'
+
 export default {
   name: 'Following',
   data() {
     return {
         persons: [
             {
-                name: "Harry Johnson",
-                portraitPath: "https://images.unsplash.com/photo-1586287011575-a23134f797f9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1100&q=80",
+                name: "Radu Johnson",
+                portraitPath: "",
                 smallText: "You both like comedy movies!",
             },
             {
@@ -46,8 +63,51 @@ export default {
                 smallText: "Watched 15 similar movies!",
             }
         ],
+        showModal: false,
     }
   },
+  methods: {
+    updateFollowers() {
+        var objectToken = localStorage.getItem('jwt');
+        var currentToken = JSON.parse( objectToken );
+        axios.get('http://localhost:8000/following/', {
+            headers: {
+                Authorization: "Bearer " + currentToken.access
+            }
+        }).then(
+            data => {
+                this.persons = [];
+                for(let i=0;i<data.data.length;i++) {
+                    this.persons.push({
+                        firstName: data.data[i]['follower']['first_name'],
+                        lastName: data.data[i]['follower']['last_name'],
+                        id: data.data[i]['follower']['id'],
+                    });
+                }
+            }
+        );
+    }
+  },
+  mounted() {
+    var objectToken = localStorage.getItem('jwt');
+    var currentToken = JSON.parse( objectToken );
+    axios.get('http://localhost:8000/following/', {
+        headers: {
+            Authorization: "Bearer " + currentToken.access
+        }
+    }).then(
+        data => {
+            this.persons = [];
+            for(let i=0;i<data.data.length;i++) {
+                this.persons.push({
+                    firstName: data.data[i]['follower']['first_name'],
+                    lastName: data.data[i]['follower']['last_name'],
+                    id: data.data[i]['follower']['id'],
+                });
+            }
+        }
+    );
+  }
 }
 </script>
 

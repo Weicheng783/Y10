@@ -6,12 +6,15 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 from django.contrib.auth.models import User
+
 from api.models import Movie
 from api.models import Review
+from api.models import AdditionalUser
 
 from api.add_movie import add_movie
 
 from api.serializers import ReviewSerializer
+from api.serializers import AdditionalUserSerializer
 
 class ReviewsAPI(generics.GenericAPIView):
     """
@@ -45,8 +48,20 @@ class ReviewsAPI(generics.GenericAPIView):
 
     def get(self, request):
         "The get requests gets list of all the reviews of users current person follows."
-        current_user=request.user
-        all_reviews = Review.objects.filter(author__follower__following=current_user)
+        current_user = request.user
+        all_reviews = Review.objects.filter(
+            author__follower__following=current_user
+        ).values(
+            'author__first_name',
+            'author__last_name',
+            'author__additionaluser__profile_picture',
+            'movie__poster_path',
+            'movie__movie_name',
+            'movie__overview',
+            'movie__id',
+            'content',
+            'rating',
+            'id',
+        )
 
-        serializer = ReviewSerializer(all_reviews, many=True)
-        return Response(serializer.data)
+        return Response(all_reviews)

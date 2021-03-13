@@ -9,6 +9,7 @@ from api.models import Follow
 from api.models import Movie
 from api.models import WatchList
 from api.models import Review
+from api.models import AdditionalUser
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -42,6 +43,7 @@ class UserSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'username',
+            'id',
         )
 
 
@@ -73,4 +75,10 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
+        fields = '__all__'
+
+
+class AdditionalUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdditionalUser
         fields = '__all__'

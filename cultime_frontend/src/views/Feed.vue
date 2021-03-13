@@ -16,20 +16,26 @@
     
 
     <div class="reviewBlock">
-      <p>Share new review</p>
+      <p class="title is-3" style="color:white;">Share new review</p>
 
+<<<<<<< HEAD
       <autocomplete :search="search" style="max-width: 450px; margin: auto; color: white; background-color: #2b4258;" defaultValue="Add new movies"></autocomplete>
+=======
+      <autocomplete @submit="updateCurrentReview" :search="search" style="max-width: 450px; margin: auto; padding-bottom: 60px;" defaultValue="Add new movies"></autocomplete>
+>>>>>>> master
 
       <p>What are your thoughts on this movie</p>
-      <input class="input" style="max-width:300px;"/>
+      <input v-model="newReviewContent" class="input" style="max-width:300px;"/>
 
       <p>Rate it on scale 1-5</p>
-      <input class="input" style="max-width:300px;" type="number" />
+      <input v-model="newReviewRating" class="input" style="max-width:300px;" type="number" />
+
+      <button @click="shareNewReview" class="button">Share Review</button>
     </div>
 
     <div v-for="review in reviews" :key="review.authorName" class="reviewBlock">
       <div style="margin: 0px; padding:15px; text-align:left; display:flex; align-items:center;">
-        <img v-bind:src=review.authorPicture style="width:75px; border-radius: 75px;"/>
+        <img v-bind:src=review.profilePicture style="width:75px; border-radius: 75px;"/>
         <p style="font-size: 20px; color:white; margin-left: 10px;">{{review.authorName}} watched <b>{{review.movieName}}</b></p>
       </div>
 
@@ -38,10 +44,18 @@
           <img style="border-radius:20px;" v-bind:src=" 'https://' + review.moviePoster" width="150px">
         </div>
 
-        <div>
-          <p style="padding-left: 20px; padding-bottom: 20px;">
+        <div style="padding-left: 20px;">
+          <p style="padding-bottom: 10px;">
             {{review.reviewContent}}
           </p>
+
+          <div v-for="n in review.rating" :key="n" style="display:inline-block;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Plain_Yellow_Star.png" width="35px;">
+          </div>
+
+          <div style="max-width:500px; padding-top:20px;">
+            <p style="color:gray; font-size:15px;">{{review.movieOverview}}</p>
+          </div>
         </div>
       </div>
 
@@ -83,9 +97,39 @@ export default {
         movieSearchQueue: [
 
         ],
+        nextMovie: -1,
+        newReviewContent: "",
+        newReviewRating: -1,
     }
   },
   methods: {
+    shareNewReview() {
+      if(this.nextMovie == -1 || this.newReviewContent.length == 0 || this.newReviewRating == -1) {
+        return;
+      }
+      var objectToken = localStorage.getItem('jwt');
+      var currentToken = JSON.parse( objectToken );
+      axios.post('http://localhost:8000/reviews/',{
+          movie_id: this.nextMovie,
+          content: this.newReviewContent,
+          rating: this.newReviewRating
+        }, {
+        headers: {
+          'authorization': 'Bearer ' + currentToken.access,
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(() => {console.log("A")});
+    },
+    updateCurrentReview(result) {
+      for(let i=0;i<this.movieSearchQueue.length;i++) {
+        if(result == this.movieSearchQueue[i]['title']) {
+          this.nextMovie = this.movieSearchQueue[i]['movieId'];
+          console.log(this.nextMovie);
+          break;
+        }
+      }
+    },
     search(input) {
       if(!(typeof input === 'string' || input instanceof String)) {return [];}
       if(input.length < 3) {return [];}
@@ -96,25 +140,94 @@ export default {
         this.movieSearchQueue = [];
         let movies = []
         for(let i=0;i<data.data.length;i++) {
-          this.movieSearchQueue.push({movieId: data.data[i]['id'],title: data.data[i]['title'] + " (" + data.data[i]['release_date'] + ")"});
+          this.movieSearchQueue.push({
+            movieId: data.data[i]['id'],
+            title: data.data[i]['title'] + " (" + data.data[i]['release_date'] + ")",
+          });
           movies.push(data.data[i]['title'] + " (" + data.data[i]['release_date'] + ")");
         }
         return movies;
       })
     },
+    updateReviews() {
+      var objectToken = localStorage.getItem('jwt');
+      var currentToken = JSON.parse( objectToken );
+      axios.get('http://localhost:8000/reviews/', {
+        headers: {
+          Authorization: "Bearer " + currentToken.access
+        }
+      }).then(data => {
+          this.reviews = [];
+          for(let i=0;i<data.data.length;i++) {
+            let currentPoster = data.data[i]['author__additionaluser__profile_picture'];
+            if(currentPoster == null) {
+              currentPoster = "https://images.unsplash.com/photo-1615105113716-63952cd0cba8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80";
+            } 
+            else {
+              currentPoster = 'http://localhost:8000/' + currentPoster.substring(9, currentPoster.length);
+            }
+
+            this.reviews.push(
+              {
+                authorName: (data.data[i]['author__first_name'] + ' ' + data.data[i]['author__last_name']),
+                movieName: (data.data[i]['movie__movie_name']),
+                reviewContent: (data.data[i]['content']),
+                rating: (data.data[i]['rating']),
+                moviePoster: ('image.tmdb.org/t/p/w500' + data.data[i]['movie__poster_path']),
+                movieOverview: (data.data[i]['movie__overview']),
+                profilePicture: currentPoster,
+              }
+            );
+          }
+        }
+      );
+    }
   },
   mounted() {
     // call refresh token
     // if error call logout
     var objectToken = localStorage.getItem('jwt');
     var currentToken = JSON.parse( objectToken );
-    console.log(currentToken);
 
-    // axios.post('http://localhost:8000/api/token/refresh/', {
-    //   refresh: currentToken.refresh
-    // }).catch(function() {
-    //   this.$emit('logOut');
-    // });
+    axios.get('http://localhost:8000/reviews/', {
+        headers: {
+          Authorization: "Bearer " + currentToken.access
+        }
+      }).then(data => {
+          this.reviews = [];
+          for(let i=0;i<data.data.length;i++) {
+            let currentPoster = data.data[i]['author__additionaluser__profile_picture'];
+            if(currentPoster == null) {
+              currentPoster = "https://images.unsplash.com/photo-1615105113716-63952cd0cba8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80";
+            } 
+            else {
+              currentPoster = 'http://localhost:8000/' + currentPoster.substring(9, currentPoster.length);
+            }
+
+            this.reviews.push(
+              {
+                authorName: (data.data[i]['author__first_name'] + ' ' + data.data[i]['author__last_name']),
+                movieName: (data.data[i]['movie__movie_name']),
+                reviewContent: (data.data[i]['content']),
+                rating: (data.data[i]['rating']),
+                moviePoster: ('image.tmdb.org/t/p/w500' + data.data[i]['movie__poster_path']),
+                movieOverview: (data.data[i]['movie__overview']),
+                profilePicture: currentPoster,
+              }
+            );
+          }
+        }
+      );
+    // call refresh token
+    // if error call logout
+
+    axios.post('http://localhost:8000/refresh/', {
+      refresh: currentToken.refresh
+    }).catch(function() {
+      this.$emit('logOut');
+    }).then(response => {
+      localStorage.setItem('jwt', JSON.stringify(response.data));
+    });
   }
 }
 </script>
