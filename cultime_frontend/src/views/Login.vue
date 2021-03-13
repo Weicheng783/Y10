@@ -3,8 +3,8 @@
   <div id="login">
     <div id="navigation">
       <b-nav tabs>
-        <img style="width:160px;height:30px;padding: 0px 20px;position:relative;top:10px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
-        alt="Screenshot-2021-03-01-at-22-22-49" border="0">
+        <img style="width:180px;height:30px;padding: 0px 20px;position:relative;top:10px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+        alt="--Cultime--" border="0">
      
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Login</router-link> |
@@ -38,14 +38,14 @@
       </div>
       <p style="color:white;padding:10px;" for="username" >Username:</p>
       <div>
-        <input placeholder="Type your username..." style="color:white;background-color:#262728;border:#black;
-        padding:15px 145px;border-radius:8px;text-align:left;" id="username" type="text" v-model="username" required autofocus>
+        <input placeholder="Type your username..." style="color: white; background-color: rgb(38, 39, 40); border-radius: 8px; text-align: left; padding: 15px; max-width: -moz-available;
+          min-width: -moz-available;" id="username" type="text" v-model="username" required autofocus>
       </div>
       <div>
         <p style="color:white;padding:10px;" for="password" >Password:</p>
         <div>
-          <input placeholder="Type your password..." style="color:white;background-color:#262728;border:#black;
-        padding:15px 145px;border-radius:8px;" id="password" type="password" v-model="password" required>
+          <input placeholder="Type your password..." style="color: white; background-color: rgb(38, 39, 40); border-radius: 8px; text-align: left; padding: 15px; max-width: -moz-available;
+          min-width: -moz-available;" id="password" type="password" v-model="password" required>
         </div>
       </div>
       <div>

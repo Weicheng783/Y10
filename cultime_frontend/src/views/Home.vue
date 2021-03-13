@@ -4,8 +4,8 @@
       <div id="navigation">
 
       <b-nav tabs>
-      <img style="width:160px;height:30px;padding: 0px 20px;position:relative;top:10px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
-        alt="Screenshot-2021-03-01-at-22-22-49" border="0">
+      <img style="width:180px;height:30px;padding: 0px 20px;position:relative;top:10px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+        alt="--Cultime--" border="0">
      
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Login</router-link> |
@@ -25,7 +25,7 @@ export default {
   name: 'Home',
   data() {
     return {
-        movieTitle: "Parasite",
+        // movieTitle: "Parasite",
     }
   },
 }

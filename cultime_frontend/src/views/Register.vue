@@ -1,10 +1,18 @@
 <template>
   <div>
-    <div id="navigation">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Create Account</router-link>
-    </div>
+      <div id="navigation">
+       <b-nav tabs>
+          <img style="width:200px;height:auto;padding: 0px 20px;position:relative;top:10px; float:left; margin-top:20px; margin-left:25px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+                alt="--Cultime--" border="0">
+      <router-link to="/feed">Feed</router-link> |
+      <router-link to="/watchlist">Watch List</router-link> |
+      <router-link to="/following">Following</router-link> |
+      <router-link to="/recommended">Recommended</router-link> |
+      <router-link to="/profile">Profile</router-link>
+
+        </b-nav>
+
+    </div>  
 
     <h4>Register</h4>
       <form>
