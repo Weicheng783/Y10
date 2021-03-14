@@ -21,8 +21,8 @@ window.onload("changeColor");
       
 
       <br style="fill:white;">
-          <div style="text-align:right;">
-        <a style="padding:0px;margin:0px;" href="https://ibb.co/VH2nb2P"><img style="width:600px;height:750px;padding: 25px 20px;border-radius:40px;" src="https://i.ibb.co/wJMG8Mx/Screenshot-2021-03-01-at-10-00-45.png" 
+          <div style="text-align:right; ">
+        <a style="padding:0px;margin:0px; min-width:600px; margin-left:620px;" href="https://ibb.co/VH2nb2P"><img style=" width:600px;height:750px;padding: 25px 20px;border-radius:40px;" src="https://i.ibb.co/wJMG8Mx/Screenshot-2021-03-01-at-10-00-45.png" 
         alt="Screenshot-2021-03-01-at-10-00-45" width="550"></a>
       </div>
     </div>
@@ -46,14 +46,14 @@ window.onload("changeColor");
       </div>
       <p style="color:white;padding:10px;" for="username" >Username:</p>
       <div>
-        <input placeholder="Type your username..." style="color: white; background-color: rgb(38, 39, 40); border-radius: 8px; text-align: left; padding: 15px; max-width: -moz-available;
-          min-width: -moz-available;" id="username" type="text" v-model="username" required autofocus>
+        <input placeholder="Type your username..." style="color: white; background-color: rgb(38, 39, 40); border-radius: 8px; text-align: left; padding: 15px; max-width: -webkit-fill-available;
+          min-width: -webkit-fill-available; min-width: -moz-available; max-width: -moz-available;" id="username" type="text" v-model="username" required autofocus>
       </div>
       <div>
         <p style="color:white;padding:10px;" for="password" >Password:</p>
         <div>
-          <input placeholder="Type your password..." style="color: white; background-color: rgb(38, 39, 40); border-radius: 8px; text-align: left; padding: 15px; max-width: -moz-available;
-          min-width: -moz-available;" id="password" type="password" v-model="password" required>
+          <input placeholder="Type your password..." style="color: white; background-color: rgb(38, 39, 40); border-radius: 8px; text-align: left; padding: 15px; max-width: -webkit-fill-available;
+          min-width: -webkit-fill-available; min-width: -moz-available; max-width: -moz-available;" id="password" type="password" v-model="password" required>
         </div>
       </div>
       <div>

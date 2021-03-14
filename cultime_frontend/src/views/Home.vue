@@ -1,7 +1,4 @@
 
-<script type="text/javascript">
-window.onload("changeColor");
-</script>
 
 <template>
     <div id='color'>
