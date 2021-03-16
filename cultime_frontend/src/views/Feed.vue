@@ -2,8 +2,8 @@
   <div>
     <div id="navigation">
        <b-nav tabs>
-          <img style="width:200px;height:auto;padding: 0px 20px;position:relative;top:10px; float:left; margin-top:20px; margin-left:25px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
-                alt="--Cultime--" border="0">
+          <a href="" style="background-color: #201c1c; width:200px;height:auto;padding: 0px 20px;position:relative;top:10px; float:left; margin-top:20px; margin-left:25px;"><img style=" " src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+                alt="--Cultime--"  border="0"></a>
       <router-link to="/feed">Feed</router-link> |
       <router-link to="/watchlist">Watch List</router-link> |
       <router-link to="/following">Following</router-link> |

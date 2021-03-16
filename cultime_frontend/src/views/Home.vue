@@ -1,13 +1,13 @@
 
 
 <template>
-    <div id='color'>
+    <div>
       
       <div id="navigation">
 
       <b-nav tabs>
-      <img @click="changeColor" style="width:180px;height:30px;padding: 0px 20px;position:relative;top:10px;" src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
-        alt="--Cultime--" border="0">
+          <a href="" style="background-color: #201c1c; width:200px;height:auto;padding: 0px 20px;position:relative;top:10px; float:left; margin-top:20px; margin-left:25px;"><img style=" " src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+                alt="--Cultime--"  border="0"></a>
      
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Login</router-link> |
