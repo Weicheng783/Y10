@@ -20,8 +20,9 @@ window.onload("changeColor");
       </b-nav>
       
       <p class="title is-2" style="color:white; margin: 60px; font-family:'Times New Roman', Times, serif;">Your private <img style="width:200px;height:auto;padding: 0px ; animation-name: navi_enter; animation-duration:2s; " src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
-                alt="Cultime" border="0"> watchlist</p>
+                alt="Cultime" border="0"> experience</p>
 
+      <!-- <p class="title is-3" style="color:white; margin: 60px; font-family:'Times New Roman', Times, serif;">Sign up today!</p> -->
 
       <br style="fill:white;">
           <div style="text-align:right; ">
@@ -58,6 +59,7 @@ window.onload("changeColor");
           <input placeholder="Type your password..." style="color: white; background-color: rgb(38, 39, 40); border-radius: 8px; text-align: left; padding: 15px; max-width: -webkit-fill-available;
           min-width: -webkit-fill-available; min-width: -moz-available; max-width: -moz-available;" id="password" type="password" v-model="password" required>
         </div>
+        <div id='notice' style='color:red; display:none;'>{{ notice }}</div>
         
       </div>
       <div>
@@ -83,6 +85,7 @@ window.onload("changeColor");
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
 
+var turns = 1 ;
 
 import axios from 'axios'
 
@@ -93,6 +96,7 @@ export default {
       username: "",
       password: "",
       isActive: false,
+      notice: 'Invalid Account or Password, Please Try Again.',
     }
   },
 
@@ -145,17 +149,49 @@ export default {
           })
           .catch(function (error) {
             console.error(error.response);
+            
             var obj = document.getElementById("submit_but");
-            obj.style.cssText= 'font-weight:bold; color: white;background-color:#036FC0;border:#036FC0; padding: 30px 200px;border-radius: 8px;margin:30px 0px; animation-name: logg; animation-duration: 6s;';
+            // obj.style.cssText= 'font-weight:bold; color: white;background-color:#036FC0;border:#036FC0; padding: 30px 200px;border-radius: 8px;  margin:30px 0px; animation-name: swing; animation-duration: 2s;';
+            console.log(turns);
+            // obj.onclick = obj.handleSubmit(e);
+            // obj.style.cssText= 'font-weight:bold; color: white;background-color:#036FC0;border:#036FC0; padding: 30px 200px;border-radius: 8px;margin:30px 0px; animation: "" ';
+            
+    if (turns == 1) {
+      turns = 0;
+      obj.style.cssText= 'font-weight:bold; color: white;background-color:#036FC0;border:#036FC0; padding: 30px 200px;border-radius: 8px;  margin:30px 0px; animation-name: swing1; animation-duration: 2s;';
+            
+    } else {
+      turns = 1;
+      obj.style.cssText= 'font-weight:bold; color: white;background-color:#036FC0;border:#036FC0; padding: 30px 200px;border-radius: 8px;  margin:30px 0px; animation-name: swing; animation-duration: 2s;';
+            
+    }
+
+  
+            // obj.value='Login Attempt Failed.'
             // obj.onclick = "handleSubmit";
+            var obj1 = document.getElementById("notice");
+            obj1.style.cssText= 'color:red; display:normal;'
+            
+
           });
       }
     }
   }
 }
+
+
+
+
 </script>
 
 <style>
+
+  #ui button toggle {
+    animation: swing 2s;
+  }
+  #restart {
+    animation: swing1 2s;
+  }
 
 input { 
     text-align:left; 
@@ -171,6 +207,48 @@ input {
 
   100% {font-weight:bold; color: white;background-color:#036FC0;border:#036FC0; padding: 30px 200px;border-radius: 8px;margin:30px 0px; }
   
+}
+
+@keyframes swing {
+  10% {
+    background-color:red;
+    transform: rotate(10deg);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  30% {
+    transform: rotate(5deg);
+  }
+  40% {
+    transform: rotate(-5deg);
+  }
+  50%,100% {
+    transform: rotate(0deg);
+    /* animation-name: swing; animation-duration: 2s; */
+
+  }
+}
+
+@keyframes swing1 {
+  10% {
+    background-color:red;
+    transform: rotate(10deg);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  30% {
+    transform: rotate(5deg);
+  }
+  40% {
+    transform: rotate(-5deg);
+  }
+  50%,100% {
+    transform: rotate(0deg);
+    /* animation-name: swing; animation-duration: 2s; */
+
+  }
 }
 
 </style>
