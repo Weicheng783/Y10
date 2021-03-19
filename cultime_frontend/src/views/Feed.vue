@@ -1,13 +1,19 @@
 <template>
   <div>
     <div id="navigation">
+       <b-nav tabs>
+          <a href="" style="background-color: #201c1c; width:200px;height:auto;padding: 0px 20px;position:relative;top:10px; float:left; margin-top:20px; margin-left:25px;"><img style=" " src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+                alt="--Cultime--"  border="0"></a>
       <router-link to="/feed">Feed</router-link> |
       <router-link to="/watchlist">Watch List</router-link> |
       <router-link to="/following">Following</router-link> |
       <router-link to="/recommended">Recommended</router-link> |
       <router-link to="/profile">Profile</router-link>
+      <button @click="$emit('logOut')" id='logout_button' style='color:#fe5e73 ;background-color:#4267B2;'>Logout</button>
+        </b-nav>
+
     </div>  
-    <button @click="$emit('logOut')" >Logout</button>
+    
 
     <div class="reviewBlock">
       <p class="title is-3" style="color:white;">Share new review</p>
@@ -238,4 +244,48 @@ h1, div {
   max-width: 800px;
   color:white;
 }
+
+
+
+#logout_button {
+  font-weight: bold;
+  display: inline-flex;
+  /* float: right; */
+  /* margin-right:10%; */
+
+  margin-left:50px;
+
+  appearance: button;
+
+    border: none;
+    background-color: #230a59;
+    border-color: lawngreen;
+
+    color: #007acc;
+    padding: 20px 10px 10px 10px;
+    /* margin: 30px 30px 20px 20px;  */
+    margin-right:10px;
+    margin-top:10px;
+    /* padding-right: 10px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 20px;
+
+    font-size: 20px;
+    border-radius: 20px;
+     
+}
+
+
+#logout_button :hover {
+    background-color: #b0a8be;
+    /* color: #1D1E1F; */
+    color: #1a57b3;
+}
+
+/* #logout_button router-link-exact-active {
+  background-color: #FFAB00;
+  color: #1D1E1F;
+} */
 </style>

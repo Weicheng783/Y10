@@ -1,13 +1,26 @@
 <template>
     <div>
-      <div id="navigation">
-        <router-link to="/feed">Feed</router-link> |
-        <router-link to="/watchlist">Watch List</router-link> |
-        <router-link to="/following">Following</router-link> |
-        <router-link to="/recommended">Recommended</router-link>
-      </div>
+     <div id="navigation">
+       <b-nav tabs>
+         
+          <a href="" style="background-color: #201c1c; width:200px;height:auto;padding: 0px 20px;position:relative;top:10px; float:left; margin-top:20px; margin-left:25px;"><img style=" " src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+                alt="--Cultime--"  border="0"></a>
+                <!-- animation-name: logo; animation-duration:6s; -->
+         
+     
+      <router-link to="/feed" >Feed</router-link> |
+      <router-link to="/watchlist" >Watch List</router-link> |
+      <router-link to="/following" >Following</router-link> |
+      <router-link to="/recommended" >Recommended</router-link> |
+      <router-link to="/profile" >Profile</router-link>
+  
+      <button @click="$emit('logOut')" id='logout_button' style='color:#fe5e73 ;background-color:#4267B2;'>Logout</button>
+        </b-nav>
 
-      <p class="title is-2" style="color:white; margin: 60px;">Your private Cultime watchlist</p>
+      </div>  
+
+      <p class="title is-2" style="color:white; margin: 60px; font-family:'Times New Roman', Times, serif;">Your private <img style="width:200px;height:auto;padding: 0px ; animation-name: navi_enter; animation-duration:2s; " src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+                alt="Cultime" border="0"> watchlist</p>
 
       <!-- Needs to be stylized and it is not working -->
       <autocomplete @submit="addNewMovie" :search="search" style="max-width: 450px; margin: auto; padding-bottom: 60px;" defaultValue="Add new movies"></autocomplete>
@@ -190,6 +203,12 @@ h1, div, p {
   color:white;
 }
 
+@keyframes navi_enter {
+  0%   { width:50%; height:auto;}
+
+  100% {width:200px; height:auto;}
+}
+
 .movieBlock {
   /* display:flex;  */
   text-align:left;
@@ -202,6 +221,7 @@ h1, div, p {
   color:white;
 }
 
+
 #removeMovieButton {
   background-color: #FFA72B;
   border-color: #FFA72B;
@@ -211,6 +231,8 @@ h1, div, p {
   background-color: #c7801e;
   border-color: #c7801e;
 }
+
+
 
 /* SEARCH BAR CSS */
 
