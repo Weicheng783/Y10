@@ -1,57 +1,64 @@
 <template>
   <div>
-      <div id="navigation">
-       <b-nav tabs>
-          <a href="" style="background-color: #201c1c; width:200px;height:auto;padding: 0px 20px;position:relative;top:10px; float:left; margin-top:20px; margin-left:25px;"><img style=" " src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
-                alt="--Cultime--"  border="0"></a>
-      <router-link to="/feed">Feed</router-link> |
-      <router-link to="/watchlist">Watch List</router-link> |
-      <router-link to="/following">Following</router-link> |
-      <router-link to="/recommended">Recommended</router-link> |
-      <router-link to="/profile">Profile</router-link>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/register">Create Account</router-link>
+    </div>
+    
+    <img style="width:600px; position:absolute; height:750px; margin-left: 300px; margin-top: -25px; padding: 25px 20px;border-radius:40px;" src="https://i.ibb.co/wJMG8Mx/Screenshot-2021-03-01-at-10-00-45.png" 
+         alt="Screenshot-2021-03-01-at-10-00-45" width="550">    
 
-        </b-nav>
+      <form class="form">
 
-    </div>  
+        <h3 style="color:white;"><b>───────Create Account───────</b></h3>
 
-    <h4>Register</h4>
-      <form>
-        <label for="first_name">First Name</label>
-        <div>
-          <input id="first_name" type="text" v-model="first_name" required autofocus>
+        <div class="field" style="margin-top: 20px;">
+         <label for="first_name" style="font-size: 12px; margin-top: 15px; margin-right: 13px;">First Name</label>
+         <div>
+           <input style="text-align:center; float:left;" size="12" placeholder="First Name"  id="first_name" type="text" v-model="first_name" required autofocus>
+         </div>
+         <label for="last_name" style="font-size: 12px; margin-left: 13px; margin-top: 15px; margin-right: 13px;">Last Name</label>
+          <div>
+            <input style="text-align: center;" size="12"  placeholder="Last Name" id="last_name" type="text" v-model="last_name" required autofocus>
+          </div>
         </div>
 
-        <label for="last_name">Last Name</label>
-        <div>
-          <input id="last_name" type="text" v-model="last_name" required autofocus>
+        <div class="field">
+          <label for="username">Username</label>
+          <div>
+            <input style="text-align: center" size="52"  placeholder="Username" id="username" type="text" v-model="username" required autofocus>
+          </div>
         </div>
 
-        <label for="username">Username</label>
-        <div>
-          <input id="username" type="text" v-model="username" required autofocus>
+        <div class="field">
+          <label for="email" >E-Mail Address</label>
+          <div>
+            <input style="text-align: center" size="52"  placeholder="E-Mail" id="email" type="email" v-model="email" required>
+          </div>
         </div>
 
-        <label for="email" >E-Mail Address</label>
-        <div>
-          <input id="email" type="email" v-model="email" required>
+        <div class="field">
+          <label for="password">Password</label>
+          <div>
+            <input style="text-align: center" size="52"  placeholder="Password" id="password" type="password" v-model="password" required>
+          </div>
         </div>
 
-        <label for="password">Password</label>
-        <div>
-          <input id="password" type="password" v-model="password" required>
-        </div>
-
-        <label for="password-confirm">Confirm Password</label>
-        <div>
-          <input id="password-confirm" type="password" v-model="password_confirmation" required>
+        <div class="field">
+          <label for="password-confirm">Confirm Password</label>
+          <div>
+            <input style="text-align: center" size="52"  placeholder="Password" id="password-confirm" type="password" v-model="password_confirmation" required>
+          </div>
         </div>
 
         <div>
-          <button type="submit" @click="handleSubmit">
+          <button style="margin-top: 20px;" type="submit" @click="handleSubmit">
             Register
           </button>
         </div>
       </form>
+
   </div>
 </template>
 
@@ -80,7 +87,7 @@ export default {
       e.preventDefault()
       if (this.password === this.password_confirmation && this.password.length > 0)
       {
-        let url = "http://localhost:8000/register/"
+        let url = "http://localhost:8000/authentication/register/"
         axios.post(url, {
           username: this.username,
           password: this.password,
@@ -119,3 +126,54 @@ export default {
   },
 }
 </script>
+
+<style>
+    
+    input{
+      border: #black;
+      border-radius: 8px;
+      background-color:#262728;
+      height: 50px;
+      
+    }
+
+    label{
+      float: left;
+      padding-bottom: 5px;
+      color:white;
+      
+      font-weight: bold;
+    }
+
+    button{
+      font-weight:bold;
+      color: white;
+      background-color:#036FC0;
+      border:#036FC0;
+      padding: 15px 150px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 20px;
+      
+
+    }
+
+    button:hover{
+      background-color: #065591;
+    }
+
+    
+
+
+    .form{
+      float: left;
+      border: 5px solid #262728;
+      border-radius: 20px;
+      background-color: #262728;
+      margin-left: 200px;
+      margin-top: 40px;
+      padding: 20px 20px 20px 20px;
+      
+
+    }
+</style>
