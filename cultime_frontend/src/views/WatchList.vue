@@ -41,10 +41,7 @@
 
         </div>
 
-        <div style="text-align:right; padding: 0px 20px 20px 0px;">
-          <button v-if="!movie.show" class="button" @click="movie.show=!movie.show">Share Review</button>
-          <button v-else-if="movie.show" class="button" id="cancelReviewButton" @click="movie.show=!movie.show">Cancel Review</button>
-          
+        <div style="text-align:right; padding: 0px 20px 20px 0px;">          
           <button class="button" id="removeMovieButton" @click="removeMovie(movie.id)">Remove Movie</button>
         </div>
 
