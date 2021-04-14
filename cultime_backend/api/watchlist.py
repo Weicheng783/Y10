@@ -62,12 +62,11 @@ class DeleteWatchListElementAPI(APIView):
 
         current_movie = Movie.objects.get(id=request.data['id'])
 
+
         if(WatchList.objects.filter(user=current_user, movie=current_movie).count() != 1):
             return Response({"Error": "Invalid request"})
 
         current_watchlist_object = WatchList.objects.get(user=current_user, movie=current_movie)
-
-        print(current_watchlist_object)
 
         current_watchlist_object.delete()
 

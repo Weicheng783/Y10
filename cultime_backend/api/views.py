@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from django.contrib.auth.models import User
 from api.models import Follow
+from api.models import AdditionalUser
 
 # Serializers we need
 from .serializers import RegisterSerializer, UserSerializer, FollowSerializer
@@ -16,9 +17,14 @@ class RegisterAPI(generics.GenericAPIView):
     def post(self, request, *args,  **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.save()
+        new_user = serializer.save()
+
+        additional_user = AdditionalUser(
+            user=new_user
+        )
+        additional_user.save()
+
         return Response({
-            "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "message": "User Created Successfully. Now perform Login to get your token",
         })
 
@@ -36,9 +42,19 @@ class FollowingAPI(generics.GenericAPIView):
     def get(self, request):
         "The get request returns all the users followed by the current logged user"
         user = request.user
-        following = Follow.objects.filter(following=user.id).prefetch_related('following')
-        serializer = FollowSerializer(following, many=True)
-        return Response(serializer.data)
+        following = Follow.objects.filter(
+            following=user.id
+        ).prefetch_related(
+            'follower'
+        ).values(
+            'follower__first_name',
+            'follower__last_name',
+            'follower__additionaluser__profile_picture',
+            'follower__id',
+            'follower__username',
+        )
+
+        return Response(following)
 
     def post(self, request):
         "Given username: ... in the body in adds follow instruction"

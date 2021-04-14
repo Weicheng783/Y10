@@ -18,7 +18,8 @@ from api.serializers import AdditionalUserSerializer
 
 class ReviewsAPI(generics.GenericAPIView):
     """
-    
+        Class that implements the functionalities to insert new review
+        and get all the reviews in the database
     """
     permission_classes = (IsAuthenticated,)
     def post(self, request):
@@ -27,6 +28,7 @@ class ReviewsAPI(generics.GenericAPIView):
         new_movie_id = request.data['movie_id']
         current_content = request.data['content']
         current_rating = request.data['rating']
+        current_is_private = request.data['is_private']
 
         add_movie(new_movie_id) 
 
@@ -39,7 +41,8 @@ class ReviewsAPI(generics.GenericAPIView):
             author=current_user,
             movie=current_movie,
             content=current_content,
-            rating=current_rating
+            rating=current_rating,
+            is_private=current_is_private,
         )
         
         new_review_element.save()
@@ -50,7 +53,8 @@ class ReviewsAPI(generics.GenericAPIView):
         "The get requests gets list of all the reviews of users current person follows."
         current_user = request.user
         all_reviews = Review.objects.filter(
-            author__follower__following=current_user
+            author__follower__following=current_user,
+            is_private=False
         ).values(
             'author__first_name',
             'author__last_name',
@@ -59,9 +63,31 @@ class ReviewsAPI(generics.GenericAPIView):
             'movie__movie_name',
             'movie__overview',
             'movie__id',
+            'movie__movie_id',
             'content',
             'rating',
             'id',
         )
 
         return Response(all_reviews)
+
+
+class RemoveReviewAPI(generics.GenericAPIView):
+    permission_classes = (IsAuthenticated,)
+    def post(self, request):
+        current_user = request.user
+        review_id = request.data['id']
+
+        if(Review.objects.filter(id=review_id).count() != 1):
+            return Response({"Error": "No such review!"})
+        
+        current_review_object = Review.objects.filter(
+            id=review_id, 
+            author=current_user
+        )
+
+        if(current_review_object.count() != 1):
+            return Response({"Error": "Invalid API call!"})
+        
+        current_review_object.delete()
+        return Response({"Message": "Review successfully deleted!"})
