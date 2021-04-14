@@ -1,65 +1,82 @@
 <template>
     <div>
-        <button>Trending now</button>
-        <button>Personal Recommendations</button>
+        <div id="navigation" style="margin-bottom: 100px;">
+            <a href="/feed" style="background-color: #201c1c; width:200px;height:auto;padding: 0px 20px;position:relative;top:10px; float:left; margin-top:20px; margin-left:25px;"><img style=" " src="https://i.ibb.co/7t9FYRv/Screenshot-2021-03-01-at-22-22-49.png" 
+                alt="--Cultime--"  border="0"></a>
+            <router-link to="/feed">Feed</router-link>
+            <router-link to="/watchlist">Watch List</router-link>
+            <router-link to="/following">Following</router-link>
+            <router-link to="/recommended">Recommended</router-link>
+            <router-link to="/profile">Profile</router-link>
+            <router-link to="/trending">Trending</router-link>
+            <button @click="$emit('logOut')" id='logout_button' style='color:#fe5e73 ;background-color:#4267B2;'>Logout</button>
+        </div>
 
-        <div v-for="movie in trendingMovies" :key="movie.movieId" class="movieBlock">
-            <div style="display:flex; padding-left: 20px; padding-top: 20px;">
-            <div>
-                <img style="border-radius:20px; max-width:200px;" v-bind:src=" 'https://image.tmdb.org/t/p/w500/' + movie.moviePoster">
-            </div>
+        <button class="button" @click="trendingMoviesShow=true">Trending now</button>
+        <button class="button" style="margin-left: 15px;" @click="trendingMoviesShow=false">Personal Recommendations</button>
 
-            <div style="padding-left: 20px; padding-bottom: 20px;">
-                <h1 style="color:white; margin:0px;" class="title is-3">
-                {{movie.movieTitle}}
-                </h1>
-                <p style="max-width: 450px; color:gray;">
-                {{movie.yearProduction}} ·
-                {{movie.genres}}
-                </p>
-                <p style="margin-bottom: 20px; margin-top: 20px; max-width: 450px;">
-                {{movie.shortSummary}}
-                </p>
+        <div v-show="trendingMoviesShow">
+            <p class="title is-3" id="white-text" style="padding-bottom: 25px; margin-top: 40px;">Trending Movies this week! 📈</p>
+            <div v-for="movie in trendingMovies" :key="movie.movieId" class="movieBlock">
+                <div style="display:flex; padding-left: 20px; padding-top: 20px;">
+                <div>
+                    <img style="border-radius:20px; max-width:200px;" v-bind:src=" 'https://image.tmdb.org/t/p/w500/' + movie.moviePoster">
+                </div>
 
-                <div v-for="n in movie.rating" :key="n" style="display:inline-block;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Plain_Yellow_Star.png" width="35px;">
+                <div style="padding-left: 20px; padding-bottom: 20px;">
+                    <h1 style="color:white; margin:0px;" class="title is-3">
+                    {{movie.movieTitle}}
+                    </h1>
+                    <p style="max-width: 450px; color:gray;">
+                    {{movie.yearProduction}} ·
+                    {{movie.genres}}
+                    </p>
+                    <p style="margin-bottom: 20px; margin-top: 20px; max-width: 450px;">
+                    {{movie.shortSummary}}
+                    </p>
+
+                    <div v-for="n in movie.rating" :key="n" style="display:inline-block;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Plain_Yellow_Star.png" width="35px;">
+                    </div>
+                </div>
+                </div>
+
+                <div style="text-align:right; padding: 20px;">
+                    <button class="button" @click="addNewMovie(movie.movieId)">Watch Later</button>
                 </div>
             </div>
-            </div>
+        </div>
 
-            <!-- <div style="text-align:right; padding: 0px 20px 20px 0px;">
-            <button v-if="!movie.show" class="button" @click="movie.show=!movie.show">Share Review</button>
-            <button v-else-if="movie.show" class="button" id="cancelReviewButton" @click="movie.show=!movie.show">Cancel Review</button>
-            
-            <button class="button" id="removeMovieButton" v-on:click="removeMovie(movie.indexId)">Remove Movie</button>
-            </div>
-
-            <div v-show="movie.show" style="padding-left: 20px;">
-            <div>
-                <p style="padding-bottom: 5px;">What are your thoughts on this movie</p>
-                <textarea id="reviewcontent" v-model="newReviewContent" class="input" style="margin-bottom: 15px; min-height:100px; max-width:550px; border:none; color:white;"></textarea>
-            </div>
-
-            <p>Rate it on scale 1-5</p>
-            <div>
-                <div class="rate" style="display:inline-block;">
-                <input type="radio" id="star5" v-model="newReviewRating" value="5" />
-                <label for="star5" title="text">5 stars</label>
-                <input type="radio" id="star4" v-model="newReviewRating" value="4" />
-                <label for="star4" title="text">4 stars</label>
-                <input type="radio" id="star3" v-model="newReviewRating" value="3" />
-                <label for="star3" title="text">3 stars</label>
-                <input type="radio" id="star2" v-model="newReviewRating" value="2" />
-                <label for="star2" title="text">2 stars</label>
-                <input type="radio" id="star1" v-model="newReviewRating" value="1" />
-                <label for="star1" title="text">1 star</label>
+        <div v-show="!trendingMoviesShow">
+            <p class="title is-3" id="white-text" style="padding-bottom: 25px; margin-top: 40px;">Recommended Movies for you! 🎥</p>
+            <div v-for="movie in recommendedMovies" :key="movie.movieId" class="movieBlock">
+                <div style="display:flex; padding-left: 20px; padding-top: 20px;">
+                <div>
+                    <img style="border-radius:20px; max-width:200px;" v-bind:src=" 'https://image.tmdb.org/t/p/w500/' + movie.moviePoster">
                 </div>
-            </div> -->
 
-            <!-- <div>
-                <button @click="shareNewReview" class="button" style="margin-top: 10px; margin-bottom:15px;">Share Review</button>
-            </div> -->
-            <!-- </div> -->
+                <div style="padding-left: 20px; padding-bottom: 20px;">
+                    <h1 style="color:white; margin:0px;" class="title is-3">
+                    {{movie.movieTitle}}
+                    </h1>
+                    <p style="max-width: 450px; color:gray;">
+                    {{movie.yearProduction}} ·
+                    {{movie.genres}}
+                    </p>
+                    <p style="margin-bottom: 20px; margin-top: 20px; max-width: 450px;">
+                    {{movie.shortSummary}}
+                    </p>
+
+                    <div v-for="n in movie.rating" :key="n" style="display:inline-block;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Plain_Yellow_Star.png" width="35px;">
+                    </div>
+                </div>
+                </div>
+
+                <div style="text-align:right; padding: 20px;">
+                    <button class="button" @click="addNewMovie(movie.movieId)">Watch Later</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -89,6 +106,9 @@ export default {
                 shortSummary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                 moviePoster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqWnWRWHFfmWcuTBva6CnPam3OWuNxBOI-oA&usqp=CAU',
             },
+            ],
+            recommendedMovies: [
+
             ],
             genres: [
                 {
@@ -167,8 +187,24 @@ export default {
                 id: 37,
                 name: "Western"
                 }
-            ]
+            ],
+            trendingMoviesShow: true,
         }
+    },
+    methods: {
+        addNewMovie(result) {
+            var objectToken = localStorage.getItem('jwt');
+            var currentToken = JSON.parse( objectToken );
+            
+            console.log(result);
+            axios.post('http://localhost:8000/watchlist/',{movie_id: result}, {
+                headers: {
+                    'authorization': 'Bearer ' + currentToken.access,
+                    'Accept' : 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(() => {});
+        },
     },
     mounted() {
         var objectToken = localStorage.getItem('jwt');
@@ -190,38 +226,70 @@ export default {
             localStorage.setItem('jwt', JSON.stringify(newToken));
 
             axios.get('http://localhost:8000/trending/').then(data => {
-                console.log(data.data);
-            });
-        });
+                this.trendingMovies = [];
+                for(let i=0;i<data.data.length;i++) {
+                    console.log(data.data[i]);
+                    let allGenres = "";
 
-        axios.get('http://localhost:8000/trending/').then(data => {
-            this.trendingMovies = [];
-            for(let i=0;i<data.data.length;i++) {
-                console.log(data.data[i]);
-                let allGenres = "";
-
-                for(let j=0;j<data.data[i]['genres'].length;j++) {
-                    for(let k=0;k<this.genres.length;k++) {
-                        if(this.genres[k].id == data.data[i]['genres'][j]) {
-                            allGenres += this.genres[k].name;
+                    for(let j=0;j<data.data[i]['genres'].length;j++) {
+                        for(let k=0;k<this.genres.length;k++) {
+                            if(this.genres[k].id == data.data[i]['genres'][j]) {
+                                allGenres += this.genres[k].name;
+                            }
                         }
-                    }
 
-                    if(j < data.data[i]['genres'].length - 1) {
-                        allGenres += ", ";
-                    }
-                } 
+                        if(j < data.data[i]['genres'].length - 1) {
+                            allGenres += ", ";
+                        }
+                    } 
 
-                this.trendingMovies.push(
-                    {
-                        movieTitle: data.data[i]['title'],
-                        moviePoster: data.data[i]['poster_path'],
-                        shortSummary: data.data[i]['overview'],
-                        yearProduction: data.data[i]['release_date'],
-                        genres: allGenres,
-                    }
-                );
-            }
+                    this.trendingMovies.push(
+                        {
+                            movieId: data.data[i]['id'],
+                            movieTitle: data.data[i]['title'],
+                            moviePoster: data.data[i]['poster_path'],
+                            shortSummary: data.data[i]['overview'],
+                            yearProduction: data.data[i]['release_date'],
+                            genres: allGenres,
+                        }
+                    );
+                }
+            });
+
+            axios.get('http://localhost:8000/recommendmovies/', {
+                headers: {
+                    Authorization: "Bearer " + currentToken.access
+                }
+            }).then(data => {
+                this.recommendedMovies = [];
+                for(let i=0;i<data.data.length;i++) {
+                    console.log(data.data[i]);
+                    let allGenres = "";
+
+                    for(let j=0;j<data.data[i]['genres'].length;j++) {
+                        for(let k=0;k<this.genres.length;k++) {
+                            if(this.genres[k].id == data.data[i]['genres'][j]) {
+                                allGenres += this.genres[k].name;
+                            }
+                        }
+
+                        if(j < data.data[i]['genres'].length - 1) {
+                            allGenres += ", ";
+                        }
+                    } 
+
+                    this.recommendedMovies.push(
+                        {
+                            movieId: data.data[i]['id'],
+                            movieTitle: data.data[i]['title'],
+                            moviePoster: data.data[i]['poster_path'],
+                            shortSummary: data.data[i]['overview'],
+                            yearProduction: data.data[i]['release_date'],
+                            genres: allGenres,
+                        }
+                    );
+                }
+            });
         });
     }
 }

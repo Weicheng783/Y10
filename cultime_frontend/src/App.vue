@@ -42,11 +42,13 @@ export default {
 #nav a.router-link-exact-active {
   color: #ffffff;
 }
+
 p, label{
   color: white;
 }
 .autocomplete-input {
-  border: 1px solid #eee;
+  color: white;
+  border: none;
   border-radius: 8px;
   width: 100%;
   padding: 12px 12px 12px 48px;
@@ -55,7 +57,7 @@ p, label{
   font-size: 16px;
   line-height: 1.5;
   flex: 1;
-  background-color: rgb(122, 117, 117);
+  background-color: #353535;
   background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTEiIGN5PSIxMSIgcj0iOCIvPjxwYXRoIGQ9Ik0yMSAyMWwtNC00Ii8+PC9zdmc+');
   background-repeat: no-repeat;
   background-position: 12px center;
@@ -64,7 +66,7 @@ p, label{
 .autocomplete-input:focus,
 .autocomplete-input[aria-expanded="true"] {
   border-color: rgba(0, 0, 0, 0.12);
-  background-color: rgba(126, 122, 122, 0.12);
+  background-color: #383838;
   outline: none;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.16);
 }
@@ -146,4 +148,90 @@ p, label{
     transform: translateY(-50%) rotate(359deg);
   }
 }
+
+#navigation a {
+  font-weight: bold;
+
+
+  appearance: button;
+
+    border: none;
+    background-color: #676172;
+
+    color: #ceaf41;
+    padding: 10px 10px 10px 10px;
+    /* margin: 30px 30px 20px 20px;  */
+    margin-right:10px;
+    margin-top:10px;
+
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 20px;
+
+    font-size: 20px;
+    border-radius: 12px;
+     
+}
+
+
+#navigation a:hover {
+      background-color: #b0a8be;
+    /* color: #1D1E1F; */
+    color: #131a05;
+
+}
+
+#nav_butt{
+    border-style:solid;
+    border-width: 20px;
+    border-color: lawngreen;
+}
+
+#navigation a.router-link-exact-active {
+  background-color: #FFAB00;
+  color: #1D1E1F;
+}
+
+#white-text {
+  color: white;
+}
+
+#logout_button {
+  font-weight: bold;
+  display: inline-flex;
+  /* float: right; */
+  /* margin-right:10%; */
+
+  margin-left:50px;
+
+  appearance: button;
+
+    border: none;
+    background-color: #230a59;
+    border-color: lawngreen;
+
+    color: #007acc;
+    padding: 10px 10px 10px 10px;
+    /* margin: 30px 30px 20px 20px;  */
+    margin-right:10px;
+    margin-top:10px;
+    /* padding-right: 10px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    min-width: 20px;
+
+    font-size: 20px;
+    border-radius: 20px;
+     
+}
+
+
+#logout_button :hover {
+    background-color: #b0a8be;
+    /* color: #1D1E1F; */
+    color: #1a57b3;
+}
+
 </style>
